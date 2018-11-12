@@ -1,0 +1,23 @@
+搬瓦工VPS实现SSR+BBR（BBR魔改）和WireGuard同时存在
+
+1.完全新建系统 CentOS 7 
+
+2.先安装BBR（魔改） 选定 内核版本
+yum update -y
+yum install -y wget && wget --no-check-certificate -O C71.sh https://raw.githubusercontent.com/xratzh/CBBR/master/C71.sh && sudo bash C71.sh
+wget --no-check-certificate -O C72.sh https://raw.githubusercontent.com/xratzh/CBBR/master/C72.sh && sudo bash C72.sh
+
+
+  监测bbr加速模块是否安装成功
+
+  lsmod |grep 'bbr_powered'
+
+3.一键安装SSR
+wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+chmod +x shadowsocksR.sh
+./shadowsocksR.sh 2>&1 | tee shadowsocksR.log
+
+
+4.安装WireGuard（不要使用centos7的一键脚本升级内核的选项 直接选择安装）
+wget https://raw.githubusercontent.com/yobabyshark/wireguard/master/wireguard_install.sh && chmod +x wireguard_install.sh && ./wireguard_install.sh
+
